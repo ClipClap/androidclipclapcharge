@@ -7,16 +7,16 @@ Te recordamos que para poder hacer de esta integración debes descargar la aplic
 ## Prerrequisitos ##
 
  1. ***Tener una cuenta ClipClap Datáfono:***
-Para poder realizar la integración con ClipClap debes primero tener una cuenta en ClipClap Datáfono, puedes hacer el proceso de registro siguiendo este [link](https://clipclap.co/) o desde la misma aplicación ClipClap Datáfono.
+Para poder realizar la integración con ClipClap debes primero tener una cuenta en ClipClap Datáfono, puedes hacer el proceso de registro siguiendo este [link](https://clipclap.co/datafono/dashboard/php/views/login.php) o desde la misma aplicación ClipClap Datáfono.
 
  2. ***Tener el secretKey de tu negocio:***
-Una vez tengas tu usuario Datáfono, tendrás que tener a la mano el “secreKey” de tu negocio, puedes consultar los pasos para adquirirlos en detalle [aquí](https://clipclap.co/).
+Una vez tengas tu usuario Datáfono, tendrás que tener a la mano el “secreKey” de tu negocio, puedes consultar los pasos para adquirirlos en detalle [aquí](https://clipclap.co/datafono/dashboard/php/views/settings.php).
 
  3. **ClipClap Billetera para tus clientes:**
 Para que tus usuarios puedan acceder al evento de pago de ClipClap deben tener instalada la aplicación Billetera, esta permitirá realizar los pagos de forma rápida y segura para tus clientes.
 
  4. ***Entorno de Prueba y Entorno de Producción:***
-Recuerda que puedes cambiar entre entorno de prueba y de producción, para llevar un mayor control de tu integración. puedes aprender cómo hacerlo en el siguiente [link](https://clipclap.co/).
+Recuerda que puedes cambiar entre entorno de prueba y de producción, para llevar un mayor control de tu integración. puedes aprender cómo hacerlo en el siguiente [link](https://clipclap.co/datafono/dashboard/php/views/settings.php).
 
 
 ## Integración ##
@@ -59,19 +59,19 @@ Incluye este botón en el xml de tu vista:
 Crea el butón de pago:
 
 	final PayAndGo paymentButton = (PayAndGo)findViewById(R.id.button);
-	
+
 Hay dos forma de crear un cobro para que ClipClap Billetera lo gestione:
 
- 1) *Forma 'producto por producto':* Esta opción permite agregar al cobro productos de forma individual especificando su nombre, precio, cantidad y el impuesto que se le aplica al producto. Así: 
-    
+ 1) *Forma 'producto por producto':* Esta opción permite agregar al cobro productos de forma individual especificando su nombre, precio, cantidad y el impuesto que se le aplica al producto. Así:
+
     paymentButton.setOnClickListener(new View.OnClickListener() {
-          
+
 	    @Override
 	    public void onClick(View v) {
-						
+
 			//Configura tu deep link para que ClipClap Billetera pueda responderte
-            PayAndGo.urlCallback = "YOUR_SCHEME://YOUR_DEEP_LINK"; 
-            
+            PayAndGo.urlCallback = "YOUR_SCHEME://YOUR_DEEP_LINK";
+
             //Crea un nuevo pago con tu llave secreta
 			CCBilleteraPayment ccPayment = new CCBilleteraPayment("YOUR_SECRET_KEY");
     ​
@@ -81,21 +81,21 @@ Hay dos forma de crear un cobro para que ClipClap Billetera lo gestione:
 		    int cantidad = 3;
             ccPayment.addItem(name, count, value, CCBilleteraPayment.IVA_REGULAR_16_);
 
-			//Después de agregar tus productos dale a nuestra librería el JSON con la 
+			//Después de agregar tus productos dale a nuestra librería el JSON con la
 			//información
-			PayAndGo.jsonObject = ccPayment.getJSON();        
+			PayAndGo.jsonObject = ccPayment.getJSON();
 	   }
 
 2) *Forma 'total-impuesto-propina':* Esta opción permite definir el total a cobrar de forma inmediata especificando el total a cobrar sin impuestos, el impuesto sobre el total y de forma opcional la propina. Así:
 
 	paymentButton.setOnClickListener(new View.OnClickListener() {
-          
+
 	    @Override
 	    public void onClick(View v) {
-						
+
 			//Configura tu deep link para que ClipClap Billetera pueda responderte
-            PayAndGo.urlCallback = "YOUR_SCHEME://YOUR_DEEP_LINK"; 
-            
+            PayAndGo.urlCallback = "YOUR_SCHEME://YOUR_DEEP_LINK";
+
             //Crea un nuevo pago con tu llave secreta
 			CCBilleteraPayment ccPayment = new CCBilleteraPayment("YOUR_SECRET_KEY");
     ​
@@ -107,15 +107,15 @@ Hay dos forma de crear un cobro para que ClipClap Billetera lo gestione:
 
 			//Así para SI incluir propina.
 		    ccPayment.addTotal (descripcion, totalSinImpuesto, impuesto, propina);
-	    
+
 		    //Así para NO incluir propina.
-		    ccPayment.addTotal (descripcion, totalSinImpuesto, impuesto, 0); 
-		    
-			//Después de agregar tus productos dale a nuestra librería el JSON con la 
+		    ccPayment.addTotal (descripcion, totalSinImpuesto, impuesto, 0);
+
+			//Después de agregar tus productos dale a nuestra librería el JSON con la
 			//información
-			PayAndGo.jsonObject = ccPayment.getJSON();        
+			PayAndGo.jsonObject = ccPayment.getJSON();
 	   }
-                                             
+
 > ***Nota:*** Estas dos formas de crear el cobro son mutuamente excluyentes. Si usted utiliza ambas formas al mismo tiempo, la *forma 'total-impuesto-tip'* prevalece sobre la *forma 'producto-por-producto'*.
 
 **Paso 3: Decirle a ClipClap Billetera que realice el cobro**
@@ -123,12 +123,12 @@ Hay dos forma de crear un cobro para que ClipClap Billetera lo gestione:
 	//Implementa este código para de obtener de ClipClap un token único para este cobro. Hasta este momento todavía el cobro no se ha hecho efectivo.
 
 	paymentButton.setSaveTokenListener(new SaveTokenListener() {
-            
+
 	    @Override
 		    public void saveToken(String token) {
-               
+
 	             //Antes de llamar a ClipClap Billetera guarda el 'token' retornado aquí en tu sistema de información.
-                
+
                 //LLamando a ClipClap Billetera para que gestione el cobro.
                try {
                     Uri uri = Uri.parse(button.getUrl());
@@ -142,7 +142,7 @@ Hay dos forma de crear un cobro para que ClipClap Billetera lo gestione:
                 }
             }
         });
-		
+
 > ***IMPORTANTE:*** Es recomendable guardar el 'token' ya que con éste usted puede relacionar el cobro con su sistema de información.
 
 
@@ -165,7 +165,7 @@ Si el cobro se realizó exitosamente:
     "YOUR_SCHEME://YOUR_DEEP_LINK?response=ok"
 
 Si el cobro fue rechazado por el cliente:
-  
+
     "YOUR_SCHEME://YOUR_DEEP_LINK?response=cancel" //El cobro fue rechazado por el cliente.
 
 Si hubo un error realizando el cobro:
