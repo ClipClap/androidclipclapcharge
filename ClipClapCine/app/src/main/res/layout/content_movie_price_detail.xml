@@ -14,7 +14,8 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="visible">
 
         <ImageView
             android:id="@+id/image"
@@ -153,13 +154,32 @@
 
     </RelativeLayout>
 
-    <sdk.clipclap.clipclapcharge.PayAndGo
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pagar con ClipClap"
-        android:id="@+id/payButton"
         android:layout_alignParentBottom="true"
-        android:background="#da3535"
-        android:textColor="#ffffff" />
+        android:background="#da3535">
+        <sdk.clipclap.clipclapcharge.PayAndGo
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Pagar con ClipClap"
+            android:id="@+id/payButton"
+            android:layout_alignParentBottom="false"
+            android:textColor="#ffffff"
+            android:background="#00ffffff" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView2"
+                android:src="@drawable/ic_clip"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp" />
+        </FrameLayout>
+    </RelativeLayout>
+
 
 </RelativeLayout>

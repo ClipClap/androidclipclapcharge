@@ -1,5 +1,8 @@
 package co.clipclap.theater;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -38,28 +41,9 @@ public class MoviePriceDetail extends AppCompatActivity {
         this.getSupportActionBar().setHomeButtonEnabled(true);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
-        String data;
         self=this;
         Intent intent = getIntent();
-        Log.e("LLEGO", "LLEGP");
-        if (intent != null && intent.getData() != null) {
-            data= intent.getDataString();
-            String cadena = "no entro";
-            if (data.contains("ok")) {
-                cadena = "pagada";
-            } else {
-                if (data.contains("cancel")) {
-                    cadena = "rechazada";
-                } else {
-                    if (data.contains("&message"))
-                        cadena = data.split("&message")[1];
-                }
-            }
-            Log.e("LLEGO", "cadena es "+cadena);
-            Toast.makeText(this, cadena, Toast.LENGTH_LONG).show();
 
-
-        }
 
         if (this.getIntent().getExtras() != null){
             b=this.getIntent().getExtras();
@@ -109,7 +93,7 @@ public class MoviePriceDetail extends AppCompatActivity {
             public void onClick(View v) {
 
                     try {
-                        CCBilleteraPayment ccBilleteraPayment = new CCBilleteraPayment("pKFe1P2iYw6z73srBDBx");
+                        CCBilleteraPayment ccBilleteraPayment = new CCBilleteraPayment("87YVXihipfTsfcFOwTqy");
                         ccBilleteraPayment.addItem("Cine: " + items.get(position).getName(), count, items.get(position).getPrice(), CCBilleteraPayment.IVA_REGULAR_16_);
                         PayAndGo.urlCallback = "cineclipclap://cine";
                         PayAndGo.jsonObject = ccBilleteraPayment.getJSON();
@@ -148,7 +132,7 @@ public class MoviePriceDetail extends AppCompatActivity {
         TextView dateT = (TextView) findViewById(R.id.date);
         nombre.setText(items.get(position).getName());
         type.setText(items.get(position).getType());
-        price.setText("$"+(items.get(position).getPrice()));
+        price.setText("$" + (items.get(position).getPrice()));
 
         int id= b.getInt(DATE,-1);
         Date date = new Date();
@@ -162,6 +146,39 @@ public class MoviePriceDetail extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        Log.e("LLEGO", "LLEGP");
+
+        String data;
+        if (intent != null && intent.getData() != null) {
+            data= intent.getDataString();
+            String cadena = "no entro";
+            if (data.contains("ok")) {
+                cadena = "pagada";
+            } else {
+                if (data.contains("cancel")) {
+                    cadena = "rechazada";
+                } else {
+                    if (data.contains("&message"))
+                        cadena = data.split("&message")[1];
+                }
+            }
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(cadena)
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.dismiss();
+                               self.onBackPressed();
+                        }
+                    })
+                    .create().show();
+
+        }
+        super.onNewIntent(intent);
+        setIntent(intent);
+    }
 
     @Override
     protected void onResume() {
