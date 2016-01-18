@@ -7,8 +7,13 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -27,8 +32,104 @@ import sdk.clipclap.payandgo.R;
 /**
  * Created by josedavidmantilla on 12/3/15.
  */
-public class PayAndGo extends Button{
+public class PayAndGo extends RelativeLayout{
 
+    public static final int BLUE_THEME=0;
+    public static final int BLACK_THEME=1;
+    public static final int WHITE_THEME=2;
+
+    public PayAndGo(Context context) {
+        super(context);
+        ctx=context;
+        super.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickListener.onClick(v);
+                click();
+            }
+        });
+        init();
+    }
+
+    public PayAndGo(Context context, AttributeSet attrs) {
+        super(context, attrs);
+
+        ctx=context;
+        super.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickListener.onClick(v);
+                click();
+            }
+        });
+        init();
+    }
+
+    public PayAndGo(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        ctx=context;
+        super.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickListener.onClick(v);
+                click();
+            }
+        });
+        init();
+    }
+
+    private void init(){
+        inflate(getContext(), R.layout.pay_and_go, this);
+    }
+
+
+    public void setTheme(int theme){
+        switch (theme){
+            case BLACK_THEME:{
+                setTextColor(getResources().getColor(R.color.colorwhite));
+                setBackGround(getResources().getColor(R.color.colorblack));
+                setBackGroundImage(R.drawable.clipbutton);
+                break;
+            }
+            case WHITE_THEME:{
+                setTextColor(getResources().getColor(R.color.colorblue));
+                setBackGround(getResources().getColor(R.color.colorwhite));
+                setBackGroundImage(R.drawable.clipbuttonblue);
+                break;
+            }
+            default:{
+                setBackGround(getResources().getColor(R.color.colorblue));
+                setTextColor(getResources().getColor(R.color.colorwhite));
+                setBackGroundImage(R.drawable.clipbutton);
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void setBackgroundColor(int color) {
+
+    }
+
+    public void setText(String text){
+
+        ((TextView)findViewById(R.id.text)).setText(text);
+    }
+
+    private void setTextColor(int  color){
+
+        ((TextView)findViewById(R.id.text)).setTextColor(color);
+    }
+
+
+    private void setBackGround(int  color){
+
+        ((FrameLayout)findViewById(R.id.relative)).setBackgroundColor(color);
+    }
+    private void setBackGroundImage(int  image){
+
+        ((ImageView)findViewById(R.id.image)).setImageResource(image);
+    }
 
     public static String secretKey="pKFe1P2iYw6z73srBDBx";
     public static final int  DEVELOPMENT=1;
@@ -46,18 +147,8 @@ public class PayAndGo extends Button{
     private SaveTokenListener mSaveTokenListener;
 
     public static ProgressDialog pd;
-    public PayAndGo(Context context) {
-        super(context);
-        ctx=context;
-        super.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickListener.onClick(v);
-               click();
-            }
-        });
 
-    }
+
 
     public String getUrl(){
         return urlDeep +  token  + "&callbackurl="+urlCallback;
@@ -191,29 +282,7 @@ public void setSaveTokenListener(SaveTokenListener saveTokenListener){
 
         }
     }
-    public PayAndGo(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        ctx=context;
-        super.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickListener.onClick(v);
-                click();
-            }
-        });
-    }
 
-    public PayAndGo(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        ctx=context;
-        super.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickListener.onClick(v);
-                click();
-            }
-        });
-    }
 
     @Override
     public void setOnClickListener(OnClickListener l) {
