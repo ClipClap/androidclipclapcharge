@@ -54,10 +54,10 @@ public class MoviePriceDetail extends AppCompatActivity {
                 updateData();
             }
         }
-        count=0;
+        count=1;
         final  PayAndGo payAndGo = (PayAndGo)findViewById(R.id.payButton);
        // payAndGo.setTheme(PayAndGo.WHITE_THEME);
-        payAndGo.setEnabled(false);
+       // payAndGo.setEnabled(false);
         ImageView addButton= (ImageView)findViewById(R.id.addbutton);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +77,7 @@ public class MoviePriceDetail extends AppCompatActivity {
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(count > 0){
+                if(count > 1){
                     count--;
                     ((TextView)findViewById(R.id.counttext)).setText(""+count);
                 }
