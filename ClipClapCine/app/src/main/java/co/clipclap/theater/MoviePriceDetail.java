@@ -30,6 +30,7 @@ public class MoviePriceDetail extends AppCompatActivity {
     public static final String TIME="time";
     public static final String CURRENT_DATA="current";
     int  count;
+    //87YVXihipfTsfcFOwTqy
     MoviePriceDetail self;
    static Bundle b;
     @Override
@@ -94,11 +95,11 @@ public class MoviePriceDetail extends AppCompatActivity {
             public void onClick(View v) {
 
                     try {
-                        CCBilleteraPayment ccBilleteraPayment = new CCBilleteraPayment("87YVXihipfTsfcFOwTqy");
+                        CCBilleteraPayment ccBilleteraPayment = new CCBilleteraPayment("87YVXihipfTsfcFOwTqy", items.get(position).getName()+Math.random());
                         ccBilleteraPayment.addItem("Cine: " + items.get(position).getName(), count, items.get(position).getPrice(), CCBilleteraPayment.IVA_REGULAR_16_);
                         PayAndGo.urlCallback = "cineclipclap://cine";
                         PayAndGo.jsonObject = ccBilleteraPayment.getJSON();
-                        PayAndGo.failureMessage = "Error intente más tarde";
+                      //  PayAndGo.failureMessage = "Error intente más tarde";
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

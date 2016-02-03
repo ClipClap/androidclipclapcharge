@@ -16,6 +16,7 @@ public class CCBilleteraPayment {
     private final String ITEMVALUE="itemValue";
     private final String TAXID="taxId";
     private final String DETAILS="details";
+    private final String PAYMENTREF="paymentRef";
     public static final int CONSUMO_REGULAR_8=5;
     public static final int IVA_EXCLUIDO_0=4;
     public static final int IVA_EXCENTO_0=3;
@@ -30,11 +31,12 @@ public class CCBilleteraPayment {
 
 
 
-   public CCBilleteraPayment(String secretKey) throws  Exception{
+   public CCBilleteraPayment(String secretKey, String paymentRef) throws  Exception{
        itemsArray = new JSONArray();
        itemClipclap= new JSONObject();
        itemClipclap.put(SECRETKEY,secretKey);
        itemClipclap.put(DETAILS,itemsArray);
+       itemClipclap.put(PAYMENTREF,paymentRef);
    }
 
 
