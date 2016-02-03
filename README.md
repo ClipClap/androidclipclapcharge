@@ -73,7 +73,7 @@ Hay dos forma de crear un cobro para que ClipClap Billetera lo gestione:
             PayAndGo.urlCallback = "YOUR_SCHEME://YOUR_DEEP_LINK";
 
             //Crea un nuevo pago con tu llave secreta
-			CCBilleteraPayment ccPayment = new CCBilleteraPayment("YOUR_SECRET_KEY");
+			CCBilleteraPayment ccPayment = new CCBilleteraPayment("YOUR_SECRET_KEY", "PAYMENT_REF");
     ​
 			//Por cada producto haga esto
 		    string nombreProducto = @"Camisa Polo";
@@ -97,7 +97,7 @@ Hay dos forma de crear un cobro para que ClipClap Billetera lo gestione:
             PayAndGo.urlCallback = "YOUR_SCHEME://YOUR_DEEP_LINK";
 
             //Crea un nuevo pago con tu llave secreta
-			CCBilleteraPayment ccPayment = new CCBilleteraPayment("YOUR_SECRET_KEY");
+			CCBilleteraPayment ccPayment = new CCBilleteraPayment("YOUR_SECRET_KEY", "PAYMENT_REF");
     ​
 		    //Agregando total sin impuesto, descripción, impuesto y propina
 			string descripcion = @"Dos perros calientes y una gaseosa";
@@ -115,7 +115,7 @@ Hay dos forma de crear un cobro para que ClipClap Billetera lo gestione:
 			//información
 			PayAndGo.jsonObject = ccPayment.getJSON();
 	   }
-
+> ***IMPORTANTE:*** Es obligatorio remplazar el campo PAYMENT_REF por su referencia de pago única, es decir, usted debe crear un nuevo paymentRef por cada transación y asegurarse de que sea único en su negocio.
 > ***Nota:*** Estas dos formas de crear el cobro son mutuamente excluyentes. Si usted utiliza ambas formas al mismo tiempo, la *forma 'total-impuesto-tip'* prevalece sobre la *forma 'producto-por-producto'*.
 
 **Paso 3: Decirle a ClipClap Billetera que realice el cobro**
