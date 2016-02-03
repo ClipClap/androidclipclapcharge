@@ -115,7 +115,7 @@ Hay dos forma de crear un cobro para que ClipClap Billetera lo gestione:
 			//información
 			PayAndGo.jsonObject = ccPayment.getJSON();
 	   }
-> ***IMPORTANTE:*** Es obligatorio remplazar el campo PAYMENT_REF por su referencia de pago única, es decir, usted debe crear un nuevo paymentRef por cada transación y asegurarse de que sea único en su negocio.
+> ***IMPORTANTE:*** Es obligatorio remplazar el campo PAYMENT_REF por su referencia de pago única, es decir, usted debe crear un nueva referencia de pago por cada transación y asegurarse de que sea único en su negocio.
 > ***Nota:*** Estas dos formas de crear el cobro son mutuamente excluyentes. Si usted utiliza ambas formas al mismo tiempo, la *forma 'total-impuesto-tip'* prevalece sobre la *forma 'producto-por-producto'*.
 
 **Paso 3: Decirle a ClipClap Billetera que realice el cobro**
