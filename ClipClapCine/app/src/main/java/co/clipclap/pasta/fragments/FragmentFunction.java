@@ -1,4 +1,4 @@
-package co.clipclap.theater.fragments;
+package co.clipclap.pasta.fragments;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,15 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.util.Date;
 
-import co.clipclap.theater.MovieDetail;
-import co.clipclap.theater.MoviePriceDetail;
-import co.clipclap.theater.R;
-import co.clipclap.theater.objects.DateParser;
-import co.clipclap.theater.objects.RoundingTextsView;
+import co.clipclap.pasta.PastaDetail;
+import co.clipclap.pasta.PastaPriceDetail;
+import co.clipclap.pasta.R;
+import co.clipclap.pasta.objects.DateParser;
+import co.clipclap.pasta.objects.RoundingTextsView;
 
 /**
  * Created by josedavidmantilla on 1/14/16.
@@ -82,12 +81,12 @@ public class FragmentFunction extends Fragment {
             roundingTextsView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(),MoviePriceDetail.class);
+                    Intent intent = new Intent(getActivity(),PastaPriceDetail.class);
                     Bundle b = new Bundle();
-                    b.putParcelableArrayList(MovieDetail.DATA, MovieDetail.items);
-                    b.putInt(MovieDetail.CURRENT_POSITION, MovieDetail.position);
-                    b.putInt(MoviePriceDetail.DATE, id);
-                    b.putInt(MoviePriceDetail.TIME, ((RoundingTextsView) v).getIds());
+                    b.putParcelableArrayList(PastaDetail.DATA, PastaDetail.items);
+                    b.putInt(PastaDetail.CURRENT_POSITION, PastaDetail.position);
+                    b.putInt(PastaPriceDetail.DATE, id);
+                    b.putInt(PastaPriceDetail.TIME, ((RoundingTextsView) v).getIds());
 
                     intent.putExtras(b);
                     startActivity(intent);

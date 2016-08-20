@@ -1,4 +1,4 @@
-package co.clipclap.theater.objects;
+package co.clipclap.pasta.objects;
 
 /**
  * Created by josedavidmantilla on 1/14/16.
@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import co.clipclap.theater.R;
+import co.clipclap.pasta.R;
 
 public class RoundingTextsView  extends RelativeLayout {
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="co.clipclap.theater">
+    package="co.clipclap.pasta">
 
     <application
         android:allowBackup="true"
@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TheaterList">
+        <activity android:name=".PastaList">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,27 +17,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MovieDetail"
+            android:name=".PastaDetail"
             android:label="@string/title_activity_movie_detail"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="co.clipclap.theater.TheaterList" />
+                android:value="co.clipclap.pasta.PastaList" />
         </activity>
         <activity
-            android:name=".MoviePriceDetail"
+            android:name=".PastaPriceDetail"
             android:launchMode="singleTask"
             android:label="@string/title_activity_movie_price_detail"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="co.clipclap.theater.MovieDetail" />
+                android:value="co.clipclap.pasta.PastaDetail" />
             <intent-filter android:label="cineClipClap">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="cineclipclap"
-                    android:host="cine" />
+                <data android:scheme="restaurante"
+                    android:host="pastas" />
             </intent-filter>
 
         </activity>

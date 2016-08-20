@@ -1,4 +1,4 @@
-package co.clipclap.theater.objects;
+package co.clipclap.pasta.objects;
 
 /**
  * Created by josedavidmantilla on 1/13/16.

@@ -1,4 +1,4 @@
-package co.clipclap.theater;
+package co.clipclap.pasta;
 
 import org.junit.Test;
 

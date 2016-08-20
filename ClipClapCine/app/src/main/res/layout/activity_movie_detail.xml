@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:background="#FFFFFF"
     tools:ignore="MergeRootFrame"
-    tools:context="co.clipclap.theater.MovieDetail">
+    tools:context="co.clipclap.pasta.PastaDetail">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

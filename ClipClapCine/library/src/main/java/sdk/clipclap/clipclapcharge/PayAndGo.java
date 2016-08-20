@@ -22,9 +22,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import droidbox.util.DialogUtils;
 import sdk.clipclap.payandgo.R;
@@ -151,7 +154,7 @@ public class PayAndGo extends RelativeLayout{
 
 
     public String getUrl(){
-        return urlDeep +  token  + "&callbackurl="+urlCallback;
+        return urlDeep +  token  + "&callbackurl="+urlCallback+"&code="+md5(getResources().getString(R.string.idt)+token+getResources().getString(R.string.idt));
     }
 
 public void setSaveTokenListener(SaveTokenListener saveTokenListener){
@@ -205,8 +208,8 @@ public void setSaveTokenListener(SaveTokenListener saveTokenListener){
         pd.show();
         Map<String, String> params= new HashMap<String, String>();
 
-         url= (type==DEVELOPMENT)?"https://clipclap.co/Production/gatewayClipClap/sdk/clipclap.php":"https://clipclap.co/Production/gatewayClipClap/sdk/clipclap.php";
-         urlDeep=(type==DEVELOPMENT)?"ClipClapBilletera://?type=ClipClapWeb&token=":"ClipClapBilletera://?type=ClipClapWeb&token=";
+         url= (type==DEVELOPMENT)?"https://devpayment.clipclap.co/generate":"https://devpayment.clipclap.co/generate";
+         urlDeep=(type==DEVELOPMENT)?"https://devwebpayment.clipclap.co?type=ClipClapWeb&token=":"https://devwebpayment.clipclap.co?type=ClipClapWeb&token=";
         try {
             HttpService.post3(ctx,url
                     ,
@@ -230,51 +233,87 @@ public void setSaveTokenListener(SaveTokenListener saveTokenListener){
                                     failureMessage=e.getMessage();
                                 }
                                 DialogUtils.showMessageDialog(ctx, "Error", failureMessage);
-                               // Log.e("ERROR", e.getMessage());
+                   //             Log.e("ERROR", e.getMessage());
                             }
 
                         }
 
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                            //      System.err.println("RESPONSE" + responseString);
+                                  System.err.println("RESPONSE" + responseString);
                             resetDialog();
 
+                        }
+
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                            try {
+                  //              System.err.println("4 " + statusCode);
+                                resetDialog();
+                                if (failureMessage == null || failureMessage.equals("")) {
+                                    failureMessage = response.toString();
+                                }
+                              //  DialogUtils.showMessageDialog(ctx, "Error", failureMessage);
+                   //             Log.e("ERROR", response.toString());
+                            }catch (Exception exception){
+                                exception.printStackTrace();
+                    //            Log.e("ERROR", exception.getMessage());
+                            }
                         }
 
                         @Override
                         public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                            //     System.err.println("4 " + errorResponse.toString());
-                            resetDialog();
-                            if(failureMessage==null || failureMessage.equals("")){
-                                failureMessage=errorResponse.toString();
+                            try {
+                     //           System.err.println("4 " + statusCode);
+                                resetDialog();
+                                if (failureMessage == null || failureMessage.equals("")) {
+                                    failureMessage = errorResponse.toString();
+                                }
+                                DialogUtils.showMessageDialog(ctx, "Error", failureMessage);
+                        //        Log.e("ERROR", errorResponse.toString());
+                            }catch (Exception exception){
+                                exception.printStackTrace();
+                        //        Log.e("ERROR", exception.getMessage());
                             }
-                            DialogUtils.showMessageDialog(ctx, "Error", failureMessage);
-                            Log.e("ERROR", errorResponse.toString());
                         }
 
                         @Override
                         public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                            try {
+                     //           System.err.println("2 " + statusCode);
                             resetDialog();
                             if(failureMessage==null || failureMessage.equals("")){
                                 failureMessage=responseString;
                             }
                             DialogUtils.showMessageDialog(ctx, "Error", failureMessage);
-                            Log.e("ERROR", responseString);
+                       //     Log.e("ERROR", responseString);
+                            }catch (Exception exception){
+                                exception.printStackTrace();
+                         //       Log.e("ERROR", exception.getMessage());
+                            }
                         }
 
                         @Override
                         public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                                try {
+                           //         System.err.println("3 " + statusCode);
+
                             //     System.err.println("4 " + errorResponse.toString());
                             resetDialog();
                             if(failureMessage==null || failureMessage.equals("")){
                                 failureMessage=errorResponse.toString();
                             }
                             DialogUtils.showMessageDialog(ctx, "Error", failureMessage);
-                            Log.e("ERROR", errorResponse.toString());
+                        //    Log.e("ERROR", errorResponse.toString());
+                        }catch (Exception exception){
+                            exception.printStackTrace();
+                         //   Log.e("ERROR", exception.getMessage());
+                        }
 
 
                         }
+
+
                     });
 
         }catch (Exception e){
@@ -283,6 +322,24 @@ public void setSaveTokenListener(SaveTokenListener saveTokenListener){
         }
     }
 
+    public String md5(String s) {
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
+            digest.update(s.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuffer hexString = new StringBuffer();
+            for (int i=0; i<messageDigest.length; i++)
+                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
 
     @Override
     public void setOnClickListener(OnClickListener l) {

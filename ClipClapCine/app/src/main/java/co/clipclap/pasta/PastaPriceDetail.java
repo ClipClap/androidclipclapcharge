@@ -1,7 +1,6 @@
-package co.clipclap.theater;
+package co.clipclap.pasta;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,18 +11,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-import co.clipclap.theater.objects.DateParser;
-import co.clipclap.theater.objects.Movie;
+import co.clipclap.pasta.objects.DateParser;
+import co.clipclap.pasta.objects.Movie;
 import sdk.clipclap.clipclapcharge.CCBilleteraPayment;
 import sdk.clipclap.clipclapcharge.PayAndGo;
 import sdk.clipclap.clipclapcharge.SaveTokenListener;
 
-public class MoviePriceDetail extends AppCompatActivity {
+public class PastaPriceDetail extends AppCompatActivity {
     public static int position;
     public static ArrayList<Movie> items;
     public static final String DATE="date";
@@ -31,12 +29,12 @@ public class MoviePriceDetail extends AppCompatActivity {
     public static final String CURRENT_DATA="current";
     int  count;
     //87YVXihipfTsfcFOwTqy
-    MoviePriceDetail self;
+    PastaPriceDetail self;
    static Bundle b;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_price_detail);
+        setContentView(R.layout.activity_movie_pasta_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         this.getSupportActionBar().setHomeButtonEnabled(true);
@@ -95,9 +93,11 @@ public class MoviePriceDetail extends AppCompatActivity {
             public void onClick(View v) {
 
                     try {
-                        CCBilleteraPayment ccBilleteraPayment = new CCBilleteraPayment("87YVXihipfTsfcFOwTqy", items.get(position).getName()+Math.random());
-                        ccBilleteraPayment.addItem("Cine: " + items.get(position).getName(), count, items.get(position).getPrice(), CCBilleteraPayment.IVA_REGULAR_16_);
-                        PayAndGo.urlCallback = "cineclipclap://cine";
+                      //  CCBilleteraPayment ccBilleteraPayment = new CCBilleteraPayment("87YVXihipfTsfcFOwTqy", items.get(position).getName()+Math.random());
+                        CCBilleteraPayment ccBilleteraPayment = new CCBilleteraPayment("YR5Y8El2T5rWkKxg0cfL", items.get(position).getName()+Math.random());
+                      //  CCBilleteraPayment ccBilleteraPayment = new CCBilleteraPayment("ltOrrdHyvQ0DHXgxRp0G", items.get(position).getName()+Math.random());
+                        ccBilleteraPayment.addItem("pastas: " + items.get(position).getName(), count, items.get(position).getPrice(), CCBilleteraPayment.IVA_REGULAR_16_);
+                        PayAndGo.urlCallback = "restaurante://pastas";
                         PayAndGo.jsonObject = ccBilleteraPayment.getJSON();
                       //  PayAndGo.failureMessage = "Error intente más tarde";
                     } catch (Exception e) {
@@ -124,9 +124,9 @@ public class MoviePriceDetail extends AppCompatActivity {
     }
 
     public void updateData(){
-        items = b.getParcelableArrayList(MovieDetail.DATA);
+        items = b.getParcelableArrayList(PastaDetail.DATA);
         ImageView img=(ImageView)findViewById(R.id.image);
-        position=b.getInt(MovieDetail.CURRENT_POSITION,-1);
+        position=b.getInt(PastaDetail.CURRENT_POSITION,-1);
         img.setImageResource(items.get(position).getImage());
         TextView nombre = (TextView) findViewById(R.id.name);
         TextView type = (TextView) findViewById(R.id.type);
@@ -136,10 +136,10 @@ public class MoviePriceDetail extends AppCompatActivity {
         type.setText(items.get(position).getType());
         price.setText("$" + (items.get(position).getPrice()));
 
-        int id= b.getInt(DATE,-1);
+      //  int id= b.getInt(DATE,-1);
         Date date = new Date();
-        date= DateParser.addDays(date,id);
-        dateT.setText(DateParser.getDate(date));
+     ////   date= DateParser.addDays(date,id);
+        dateT.setText("");
     }
 
     @Override

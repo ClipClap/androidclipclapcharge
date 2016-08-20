@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="co.clipclap.theater.MovieDetail"
+    tools:context="co.clipclap.pasta.PastaDetail"
     tools:showIn="@layout/activity_movie_detail"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_width="fill_parent"

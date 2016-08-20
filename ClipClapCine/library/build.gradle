@@ -30,3 +30,16 @@ dependencies {
     compile 'com.loopj.android:android-async-http:1.4.8'
     compile 'com.android.support:design:22.2.1'
 }
+
+// Task to delete old jar
+task deleteOldJar(type: Delete){
+    delete 'release/AndroidPlugin2.jar'
+}
+// task to export contents as jar
+task exportJar(type: Copy) {
+    from ('build/intermediates/bundles/release/')
+    into ('release/')
+    include ('classes.jar')
+    rename('classes.jar', 'AndroidPlugin2.jar')
+}
+exportJar.dependsOn(deleteOldJar, build)

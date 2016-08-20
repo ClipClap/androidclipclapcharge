@@ -1,4 +1,4 @@
-package co.clipclap.theater.adapters;
+package co.clipclap.pasta.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,13 +9,13 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import co.clipclap.theater.R;
-import co.clipclap.theater.objects.Movie;
+import co.clipclap.pasta.R;
+import co.clipclap.pasta.objects.Movie;
 
 /**
  * Created by josedavidmantilla on 1/13/16.
  */
-public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
+public class PastaAdapter extends RecyclerView.Adapter<PastaAdapter.MovieViewHolder> {
 
         private List<Movie> items;
 
@@ -33,7 +33,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             }
         }
 
-        public MovieAdapter(List<Movie> items) {
+        public PastaAdapter(List<Movie> items) {
             this.items = items;
         }
 
@@ -53,7 +53,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         public void onBindViewHolder(MovieViewHolder viewHolder, int i) {
             viewHolder.imagen.setImageResource(items.get(i).getImage());
             viewHolder.nombre.setText(items.get(i).getName());
-            viewHolder.type.setText("Género:"+items.get(i).getType());
+            viewHolder.type.setText("Precio: $"+items.get(i).getPrice());
         }
 
 }

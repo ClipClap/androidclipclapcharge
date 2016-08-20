@@ -30,7 +30,7 @@ public class HttpService {
 
 
     public static void post(Context context, String url, JSONObject params, AsyncHttpResponseHandler responseHandler) throws Exception {
-        client.setTimeout(50000);
+        client.setTimeout(120000);
         StringEntity entity = new StringEntity(params.toString());
         System.err.println(getAbsoluteUrl(context, url) + "?" + params.toString());
         client.addHeader("Content-Type", "application/json");
@@ -41,11 +41,11 @@ public class HttpService {
 
 
     public static void post3(Context context, String url, JSONObject params, AsyncHttpResponseHandler responseHandler) throws Exception {
-        client.setTimeout(50000);
+        client.setTimeout(120000);
      //   client.addHeader("Content-Type", "application/x-www-form-urlencoded");
         StringEntity entity = new StringEntity(params.toString());
         Log.d("COMPRAS", getAbsoluteUrl(context, url) + "->" + params.toString());
-        client.post(context, getAbsoluteUrl(context,url),entity,"application/x-www-form-urlencoded",  responseHandler);
+        client.post(context, getAbsoluteUrl(context,url),entity,"application/json",  responseHandler);
 
     }
 

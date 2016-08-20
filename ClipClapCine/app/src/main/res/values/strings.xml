@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ClipClapCine</string>
-    <string name="title_activity_movie_detail">MovieDetail</string>
-    <string name="title_activity_movie_price_detail">MoviePriceDetail</string>
+    <string name="app_name">Restaurante Clip Clap</string>
+    <string name="title_activity_movie_detail">Pastas</string>
+    <string name="title_activity_movie_price_detail">Pastas</string>
 </resources>

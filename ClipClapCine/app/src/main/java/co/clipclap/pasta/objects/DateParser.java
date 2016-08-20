@@ -1,4 +1,4 @@
-package co.clipclap.theater.objects;
+package co.clipclap.pasta.objects;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

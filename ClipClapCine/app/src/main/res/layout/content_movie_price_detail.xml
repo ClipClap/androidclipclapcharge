@@ -9,8 +9,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="co.clipclap.theater.MoviePriceDetail"
-    tools:showIn="@layout/activity_movie_price_detail">
+    tools:context="co.clipclap.pasta.PastaPriceDetail"
+    tools:showIn="@layout/activity_movie_pasta_detail">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cine ClipClap"
+            android:text="Restaurante ClipClap"
             android:id="@+id/cine"
             android:layout_toRightOf="@+id/image"
             android:layout_alignParentTop="false"
@@ -94,7 +94,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="General"
+                        android:text="Precio"
                         android:id="@+id/textView2"
                         android:textSize="20sp"
                         android:textColor="#000000" />

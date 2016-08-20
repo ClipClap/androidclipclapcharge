@@ -1,4 +1,4 @@
-package co.clipclap.theater;
+package co.clipclap.pasta;
 
 
 
@@ -13,11 +13,11 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
-import co.clipclap.theater.fragments.FragmentDetail;
-import co.clipclap.theater.fragments.FragmentFunction;
-import co.clipclap.theater.objects.Movie;
+import co.clipclap.pasta.fragments.FragmentDetail;
+import co.clipclap.pasta.fragments.FragmentFunction;
+import co.clipclap.pasta.objects.Movie;
 
-public class MovieDetail extends AppCompatActivity {
+public class PastaDetail extends AppCompatActivity {
 public static final String DATA="Data";
     public static final String CURRENT_POSITION="position";
     public static final String CURRENT_DATA="current";
